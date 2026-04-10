@@ -7,9 +7,7 @@ on:
   workflow_dispatch:   # allow manual trigger from GitHub UI
 
 permissions:
-  contents: write
-  pages: write
-  id-token: write
+  contents: write   # needed to commit results back to main
 
 jobs:
   search:
@@ -18,8 +16,6 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -33,7 +29,7 @@ jobs:
       - name: Run job search
         run: python job_search.py
 
-      - name: Commit results + dashboard
+      - name: Commit results + dashboard to main
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
@@ -41,26 +37,3 @@ jobs:
           git diff --staged --quiet \
             || git commit -m "Job search results $(date -u +%Y-%m-%d)"
           git push
-
-  # Deploy index.html to GitHub Pages after each successful search run
-  deploy-pages:
-    needs: search
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-        with:
-          ref: main   # pick up the commit from the search job
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: "."   # serve from repo root (index.html lives here)
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
