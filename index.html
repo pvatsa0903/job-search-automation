@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Job Search — Phalguni Vatsa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: 9999px; border: 1.5px solid #cbd5e1;
+      font-size: .8rem; font-weight: 500; cursor: pointer; background: white;
+      transition: all .15s;
+    }
+    .pill.active { background: #1e40af; color: white; border-color: #1e40af; }
+    .pill:hover:not(.active) { border-color: #1e40af; color: #1e40af; }
+    .badge {
+      background: #e2e8f0; color: #475569; padding: 1px 7px;
+      border-radius: 9999px; font-size: .72rem;
+    }
+    .pill.active .badge { background: #3b82f6; color: white; }
+    .job-card {
+      background: white; border: 1px solid #e2e8f0; border-radius: 12px;
+      padding: 18px 20px; transition: box-shadow .15s;
+    }
+    .job-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+    .company-badge {
+      display: inline-block; padding: 2px 10px; border-radius: 9999px;
+      font-size: .72rem; font-weight: 600; background: #eff6ff; color: #1d4ed8;
+    }
+    .apply-btn {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 7px 16px; background: #1e40af; color: white;
+      border-radius: 8px; font-size: .82rem; font-weight: 500;
+      text-decoration: none; transition: background .15s;
+    }
+    .apply-btn:hover { background: #1d3a9e; }
+    #no-results { display: none; }
+  </style>
+</head>
+<body class="min-h-screen">
+
+<!-- Header -->
+<header class="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-10 px-6">
+  <div class="max-w-5xl mx-auto">
+    <div class="flex items-start justify-between flex-wrap gap-4">
+      <div>
+        <h1 class="text-3xl font-bold tracking-tight">Job Search Dashboard</h1>
+        <p class="mt-1 text-blue-200 text-sm">Phalguni Vatsa · Product Manager Roles · Updated automatically Mon–Thu</p>
+      </div>
+      <div class="text-right">
+        <div class="text-4xl font-bold">60</div>
+        <div class="text-blue-200 text-sm">roles found (last 7 days)</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Controls -->
+<div class="max-w-5xl mx-auto px-6 py-6 space-y-4">
+
+  <!-- Run date pills -->
+  <div class="flex flex-wrap gap-2 items-center">
+    <span class="text-sm font-medium text-slate-500 mr-1">Run date:</span>
+    <button class="pill active" data-date="all">All dates</button>
+    <button class="pill" data-date="2026-04-10">2026-04-10 <span class="badge">60</span></button>
+
+  </div>
+
+  <!-- Search + company filter row -->
+  <div class="flex flex-wrap gap-3">
+    <input id="search" type="text" placeholder="Search roles…"
+      class="flex-1 min-w-[200px] border border-slate-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+    <select id="company-filter"
+      class="border border-slate-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+      <option value="">All companies</option>
+      <option value="Airbnb">Airbnb</option><option value="Anthropic">Anthropic</option><option value="Coinbase">Coinbase</option><option value="Databricks">Databricks</option><option value="Discord">Discord</option><option value="Figma">Figma</option><option value="PayPal">PayPal</option><option value="Pinterest">Pinterest</option><option value="Reddit">Reddit</option>
+    </select>
+  </div>
+
+  <!-- Results count -->
+  <p id="results-count" class="text-sm text-slate-400"></p>
+</div>
+
+<!-- Job list -->
+<main class="max-w-5xl mx-auto px-6 pb-16">
+  <div id="job-list" class="grid gap-3"></div>
+  <div id="no-results" class="py-20 text-center text-slate-400">
+    <div class="text-5xl mb-4">🔍</div>
+    <p class="font-medium">No matching roles found</p>
+    <p class="text-sm mt-1">Try adjusting filters or wait for the next automated run</p>
+  </div>
+</main>
+
+<script>
+const JOBS = [{"title": "Base Senior Product Manager, Growth", "company": "Coinbase", "location": "Remote - USA", "posted": "2026-04-10", "url": "https://www.coinbase.com/careers/positions/7736964?gh_jid=7736964", "run_date": "2026-04-10"}, {"title": "Base Senior Product Manager, Privacy", "company": "Coinbase", "location": "Remote - USA", "posted": "2026-04-10", "url": "https://www.coinbase.com/careers/positions/7762279?gh_jid=7762279", "run_date": "2026-04-10"}, {"title": "Group Product Manager - Financial Engineering ", "company": "Coinbase", "location": "Remote - USA", "posted": "2026-04-10", "url": "https://www.coinbase.com/careers/positions/7789404?gh_jid=7789404", "run_date": "2026-04-10"}, {"title": "Product Manager II - Cash Balances ", "company": "Coinbase", "location": "Remote - USA", "posted": "2026-04-10", "url": "https://www.coinbase.com/careers/positions/7484189?gh_jid=7484189", "run_date": "2026-04-10"}, {"title": "Product Manager II , Growth Activation ", "company": "Coinbase", "location": "Remote - USA", "posted": "2026-04-10", "url": "https://www.coinbase.com/careers/positions/7361803?gh_jid=7361803", "run_date": "2026-04-10"}, {"title": "Product Manager II , Growth Engagement ", "company": "Coinbase", "location": "Remote - USA", "posted": "2026-04-10", "url": "https://www.coinbase.com/careers/positions/7623211?gh_jid=7623211", "run_date": "2026-04-10"}, {"title": "Senior Product Manager, Enterprise Applications - Finance Systems", "company": "Coinbase", "location": "Remote - USA", "posted": "2026-04-10", "url": "https://www.coinbase.com/careers/positions/7404427?gh_jid=7404427", "run_date": "2026-04-10"}, {"title": "Senior Product Manager, Sign-up, Sign-in, and Recovery", "company": "Coinbase", "location": "Remote - USA", "posted": "2026-04-10", "url": "https://www.coinbase.com/careers/positions/7679070?gh_jid=7679070", "run_date": "2026-04-10"}, {"title": "Product Manager, API Growth", "company": "Anthropic", "location": "San Francisco, CA | New York City, NY | Seattle, WA", "posted": "2026-04-10", "url": "https://job-boards.greenhouse.io/anthropic/jobs/5181852008", "run_date": "2026-04-10"}, {"title": "Senior Product Manager, Education Labs", "company": "Anthropic", "location": "San Francisco, CA | New York City, NY", "posted": "2026-04-10", "url": "https://job-boards.greenhouse.io/anthropic/jobs/5183006008", "run_date": "2026-04-10"}, {"title": "Senior Product Manager, Ads API", "company": "Reddit", "location": "Remote - United States", "posted": "2026-04-09", "url": "https://job-boards.greenhouse.io/reddit/jobs/7746309", "run_date": "2026-04-10"}, {"title": "Staff Product Manager, Finance Applications", "company": "Reddit", "location": "Remote - United States", "posted": "2026-04-09", "url": "https://job-boards.greenhouse.io/reddit/jobs/7803856", "run_date": "2026-04-10"}, {"title": "Staff Product Manager, Paid User Acquisition", "company": "Reddit", "location": "Remote - United States", "posted": "2026-04-09", "url": "https://job-boards.greenhouse.io/reddit/jobs/7724536", "run_date": "2026-04-10"}, {"title": "Sr. Staff Product Owner, Accounting Systems", "company": "Pinterest", "location": "San Francisco, CA, US; Remote, US", "posted": "2026-04-09", "url": "https://www.pinterestcareers.com/jobs/?gh_jid=7684630", "run_date": "2026-04-10"}, {"title": "Learning Product Manager Lead", "company": "Databricks", "location": "United States", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8466731002", "run_date": "2026-04-10"}, {"title": "Product Manager, New Grad (2026) - Amsterdam", "company": "Databricks", "location": "Amsterdam, Netherlands", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8133727002", "run_date": "2026-04-10"}, {"title": "Product Manager, New Grad (2026) - Berlin", "company": "Databricks", "location": "Berlin, Germany", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8145800002", "run_date": "2026-04-10"}, {"title": "Sr. Product Manager, Compute Platform", "company": "Databricks", "location": "San Francisco, California", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8200462002", "run_date": "2026-04-10"}, {"title": "Sr. Product Manager, Compute Platform", "company": "Databricks", "location": "Seattle, Washington", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8200284002", "run_date": "2026-04-10"}, {"title": "Sr. Product Manager, Databricks AI", "company": "Databricks", "location": "Seattle, Washington", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8136204002", "run_date": "2026-04-10"}, {"title": "Sr. Product Manager, Databricks AI", "company": "Databricks", "location": "San Francisco, California", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8136071002", "run_date": "2026-04-10"}, {"title": "Sr. Product Manager, Databricks Free Edition", "company": "Databricks", "location": "San Francisco, California", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7680573002", "run_date": "2026-04-10"}, {"title": "Sr. Product Manager, Databricks Free Edition", "company": "Databricks", "location": "Seattle, Washington", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8235785002", "run_date": "2026-04-10"}, {"title": "Sr. Product Manager, Databricks Repos", "company": "Databricks", "location": "San Francisco, California", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8326513002", "run_date": "2026-04-10"}, {"title": "Sr. Product Manager, Databricks Repos", "company": "Databricks", "location": "Seattle, Washington", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8326570002", "run_date": "2026-04-10"}, {"title": "Sr. Product Manager, Data Engineering", "company": "Databricks", "location": "San Francisco, California", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=6322654002", "run_date": "2026-04-10"}, {"title": "Sr. Product Manager, Data Governance", "company": "Databricks", "location": "Seattle, Washington", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7863522002", "run_date": "2026-04-10"}, {"title": "Sr. Product Manager, Data Governance", "company": "Databricks", "location": "San Francisco, California", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7863365002", "run_date": "2026-04-10"}, {"title": "Sr. Product Manager, DBSQL", "company": "Databricks", "location": "San Francisco, California", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7924423002", "run_date": "2026-04-10"}, {"title": "Sr. Product Manager, DBSQL", "company": "Databricks", "location": "Seattle, Washington", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7929994002", "run_date": "2026-04-10"}, {"title": "Sr. Product Manager, Lakeflow", "company": "Databricks", "location": "Amsterdam, Netherlands", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8186386002", "run_date": "2026-04-10"}, {"title": "Sr. Product Manager - Technical", "company": "Databricks", "location": "New York City, New York", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8387085002", "run_date": "2026-04-10"}, {"title": "Staff Product Manager", "company": "Databricks", "location": "Berlin, Germany", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7649411002", "run_date": "2026-04-10"}, {"title": "Staff Product Manager", "company": "Databricks", "location": "Amsterdam, Netherlands", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7649409002", "run_date": "2026-04-10"}, {"title": "Staff Product Manager, AI Platform", "company": "Databricks", "location": "Seattle, Washington", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8427940002", "run_date": "2026-04-10"}, {"title": "Staff Product Manager, AI Platform", "company": "Databricks", "location": "San Francisco, California", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8420609002", "run_date": "2026-04-10"}, {"title": "Staff Product Manager, Content Experience", "company": "Databricks", "location": "San Francisco, California", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8040989002", "run_date": "2026-04-10"}, {"title": "Staff Product Manager, Content Experience", "company": "Databricks", "location": "Seattle, Washington", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8041821002", "run_date": "2026-04-10"}, {"title": "Staff Product Manager, Security", "company": "Databricks", "location": "Seattle, Washington", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7110509002", "run_date": "2026-04-10"}, {"title": "Staff Product Manager, Security", "company": "Databricks", "location": "San Francisco, California", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7110499002", "run_date": "2026-04-10"}, {"title": "Staff Product Manager, Serverless Workspaces", "company": "Databricks", "location": "Seattle, Washington", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8427954002", "run_date": "2026-04-10"}, {"title": "Staff Product Manager, Serverless Workspaces", "company": "Databricks", "location": "San Francisco, California", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8420607002", "run_date": "2026-04-10"}, {"title": "Staff Product Manager - Technical", "company": "Databricks", "location": "Amsterdam, Netherlands", "posted": "2026-04-09", "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8394060002", "run_date": "2026-04-10"}, {"title": "Product Manager, Monetization", "company": "Anthropic", "location": "San Francisco, CA | New York City, NY | Seattle, WA", "posted": "2026-04-09", "url": "https://job-boards.greenhouse.io/anthropic/jobs/5153773008", "run_date": "2026-04-10"}, {"title": "Product Manager, Multi-Cloud Growth - Google", "company": "Anthropic", "location": "San Francisco, CA", "posted": "2026-04-09", "url": "https://job-boards.greenhouse.io/anthropic/jobs/5153924008", "run_date": "2026-04-10"}, {"title": "Lead Product Manager", "company": "PayPal", "location": "2 Locations", "posted": "2026-04-08", "url": "https://paypal.wd1.myworkdayjobs.com/job/San-Jose-California-United-States-of-America/Lead-Product-Manager_R0135992-1", "run_date": "2026-04-10"}, {"title": "Product Manager, Figma Weave (New York, United States)", "company": "Figma", "location": "New York, NY", "posted": "2026-04-08", "url": "https://boards.greenhouse.io/figma/jobs/5819866004?gh_jid=5819866004", "run_date": "2026-04-10"}, {"title": "Product Manager", "company": "Airbnb", "location": "San Francisco, CA", "posted": "2026-04-08", "url": "https://careers.airbnb.com/positions/7724793?gh_jid=7724793", "run_date": "2026-04-10"}, {"title": "Director of Product Management, Personalized Experiences", "company": "Pinterest", "location": "San Francisco, CA, US; Remote, CA, US", "posted": "2026-04-07", "url": "https://www.pinterestcareers.com/jobs/?gh_jid=7630636", "run_date": "2026-04-10"}, {"title": "Principal Product Manager, AI Compliance", "company": "Pinterest", "location": "San Francisco, CA, US; Remote, US", "posted": "2026-04-07", "url": "https://www.pinterestcareers.com/jobs/?gh_jid=7494948", "run_date": "2026-04-10"}, {"title": "Sr. Product Manager, Ads Formats", "company": "Pinterest", "location": "San Francisco, CA, US; Remote, US", "posted": "2026-04-07", "url": "https://www.pinterestcareers.com/jobs/?gh_jid=7572846", "run_date": "2026-04-10"}, {"title": "Sr. Product Manager, Advertiser Experience", "company": "Pinterest", "location": "San Francisco, CA, US; Remote, US", "posted": "2026-04-07", "url": "https://www.pinterestcareers.com/jobs/?gh_jid=6972495", "run_date": "2026-04-10"}, {"title": "Sr. Product Manager, Performance Marketing", "company": "Pinterest", "location": "San Francisco, CA, US; Remote, US", "posted": "2026-04-07", "url": "https://www.pinterestcareers.com/jobs/?gh_jid=7572197", "run_date": "2026-04-10"}, {"title": "Staff Product Manager, AI/ML Personalization", "company": "Pinterest", "location": "San Francisco, CA, US; Remote, US", "posted": "2026-04-07", "url": "https://www.pinterestcareers.com/jobs/?gh_jid=7368194", "run_date": "2026-04-10"}, {"title": "Staff Product Manager, AI Safety", "company": "Pinterest", "location": "San Francisco, CA, US; Remote, US", "posted": "2026-04-07", "url": "https://www.pinterestcareers.com/jobs/?gh_jid=7718015", "run_date": "2026-04-10"}, {"title": "Lead Product Manager", "company": "PayPal", "location": "San Jose, California, United States of America", "posted": "2026-04-07", "url": "https://paypal.wd1.myworkdayjobs.com/job/San-Jose-California-United-States-of-America/Lead-Product-Manager_R0135360-1", "run_date": "2026-04-10"}, {"title": "Sr Product Manager", "company": "PayPal", "location": "San Jose, California, United States of America", "posted": "2026-04-07", "url": "https://paypal.wd1.myworkdayjobs.com/job/San-Jose-California-United-States-of-America/Sr-Product-Manager_R0135361-1", "run_date": "2026-04-10"}, {"title": "Senior Product Manager, Nitro", "company": "Discord", "location": "San Francisco Bay Area", "posted": "2026-04-07", "url": "https://job-boards.greenhouse.io/discord/jobs/8490274002", "run_date": "2026-04-10"}, {"title": "Product Manager, EMEA", "company": "Airbnb", "location": "London, United Kingdom, Paris, France", "posted": "2026-04-07", "url": "https://careers.airbnb.com/positions/7775427?gh_jid=7775427", "run_date": "2026-04-10"}, {"title": "Product Manager, Stays", "company": "Airbnb", "location": "United States ", "posted": "2026-04-07", "url": "https://careers.airbnb.com/positions/7767684?gh_jid=7767684", "run_date": "2026-04-10"}];
+
+let activeDate = "all";
+let searchQ    = "";
+let company    = "";
+
+const listEl   = document.getElementById("job-list");
+const countEl  = document.getElementById("results-count");
+const noResEl  = document.getElementById("no-results");
+
+function render() {
+  const filtered = JOBS.filter(j => {
+    if (activeDate !== "all" && j.run_date !== activeDate) return false;
+    if (company && j.company !== company) return false;
+    if (searchQ) {
+      const q = searchQ.toLowerCase();
+      if (!j.title.toLowerCase().includes(q) &&
+          !j.company.toLowerCase().includes(q) &&
+          !j.location.toLowerCase().includes(q)) return false;
+    }
+    return true;
+  });
+
+  listEl.innerHTML = filtered.map(j => `
+    <div class="job-card">
+      <div class="flex flex-wrap items-start justify-between gap-3">
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <span class="company-badge">${j.company}</span>
+            <span class="text-xs text-slate-400">${j.posted}</span>
+            ${j.location ? `<span class="text-xs text-slate-400">📍 ${j.location}</span>` : ""}
+          </div>
+          <h3 class="font-semibold text-slate-800 text-base leading-snug">${j.title}</h3>
+        </div>
+        ${j.url ? `<a href="${j.url}" target="_blank" rel="noopener" class="apply-btn shrink-0">Apply ↗</a>` : ""}
+      </div>
+    </div>
+  `).join("");
+
+  noResEl.style.display = filtered.length === 0 ? "block" : "none";
+  countEl.textContent   = `Showing ${filtered.length} of ${JOBS.length} roles`;
+}
+
+// Date pills
+document.querySelectorAll(".pill[data-date]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".pill[data-date]").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    activeDate = btn.dataset.date;
+    render();
+  });
+});
+
+// Search
+document.getElementById("search").addEventListener("input", e => {
+  searchQ = e.target.value.trim();
+  render();
+});
+
+// Company filter
+document.getElementById("company-filter").addEventListener("change", e => {
+  company = e.target.value;
+  render();
+});
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+name: Job Search Automation
+
+on:
+  schedule:
+    # 3 pm PST = 23:00 UTC  (Mon–Thu)
+    - cron: "0 23 * * 1-4"
+  workflow_dispatch:   # allow manual trigger from GitHub UI
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  search:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run job search
+        run: python job_search.py
+
+      - name: Commit results + dashboard
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add results/ index.html
+          git diff --staged --quiet \
+            || git commit -m "Job search results $(date -u +%Y-%m-%d)"
+          git push
+
+  # Deploy index.html to GitHub Pages after each successful search run
+  deploy-pages:
+    needs: search
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          ref: main   # pick up the commit from the search job
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."   # serve from repo root (index.html lives here)
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
