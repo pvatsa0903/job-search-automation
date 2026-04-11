@@ -1037,6 +1037,7 @@ function render(tab) {{
             ${{j.location ? `<span class="text-xs text-slate-400">📍 ${{j.location}}</span>` : ""}}
           </div>
           <h3 class="font-semibold text-slate-800 text-[15px] leading-snug">${{j.title}}</h3>
+          ${{j.match_reason ? `<p class="text-xs text-slate-500 italic mt-1">💡 ${{j.match_reason}}</p>` : ""}}
         </div>
         ${{j.url ? `<a href="${{j.url}}" target="_blank" rel="noopener" class="apply-btn shrink-0">Apply ↗</a>` : ""}}
       </div>
@@ -1110,11 +1111,82 @@ render("undated");
 # ENTRY POINT
 # ══════════════════════════════════════════════════════════════════════════════
 
+# ══════════════════════════════════════════════════════════════════════════════
+# MATCH REASON  (Claude Haiku — 1 API call for all jobs)
+# ══════════════════════════════════════════════════════════════════════════════
+
+_PROFILE_SUMMARY = (
+    "Phalguni Vatsa — Senior PM, 10 yrs B2B/B2C SaaS. "
+    "CVS Health: scaled $17M+ monetization platform, led 0→1 AI personalization dashboard (wearables + recommendations), "
+    "designed gamified retention (Badges, Streaks, Team Challenges), multichannel notification strategy, "
+    "membership tiering, onboarding funnel optimization (30M-user health platform). "
+    "Autodesk: subscription renewal automation ($5B+ ARR), VoC dashboard, personalized checkout upsell/cross-sell. "
+    "Core skills: growth, monetization, engagement/retention, AI-driven products, experimentation/A/B testing, "
+    "0→1 launches, B2C consumer, health-tech, CRM, data science."
+)
+
+
+def generate_match_reasons(jobs: List[Dict]) -> List[Dict]:
+    """Call Claude Haiku once with all jobs batched; add match_reason to each."""
+    import os
+    api_key = os.environ.get("ANTHROPIC_API_KEY", "")
+    if not api_key:
+        log.warning("ANTHROPIC_API_KEY not set — skipping match reasons")
+        for j in jobs:
+            j.setdefault("match_reason", "")
+        return jobs
+
+    try:
+        import anthropic
+    except ImportError:
+        log.warning("anthropic package not installed — skipping match reasons")
+        for j in jobs:
+            j.setdefault("match_reason", "")
+        return jobs
+
+    # Build numbered job list for the prompt
+    lines = [
+        f"{i+1}. {j['company']} | {j['title']}"
+        + (f" | {j['location']}" if j.get("location") else "")
+        for i, j in enumerate(jobs)
+    ]
+
+    prompt = (
+        f"Candidate profile: {_PROFILE_SUMMARY}\n\n"
+        "For each job below write exactly ONE sentence (≤15 words) explaining why it matches "
+        "this candidate's specific experience. Be concrete — mention the overlapping skill or domain. "
+        "Return a JSON array of strings only, one string per job, in the same order.\n\n"
+        "Jobs:\n" + "\n".join(lines)
+    )
+
+    try:
+        client = anthropic.Anthropic(api_key=api_key)
+        msg = client.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=2048,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        raw = msg.content[0].text.strip()
+        m = re.search(r"\[.*\]", raw, re.DOTALL)
+        reasons: List[str] = json.loads(m.group(0)) if m else []
+        for i, j in enumerate(jobs):
+            j["match_reason"] = reasons[i] if i < len(reasons) else ""
+        log.info(f"  ✓ Match reasons generated for {len(jobs)} roles")
+    except Exception as e:
+        log.warning(f"Match reason generation failed: {e}")
+        for j in jobs:
+            j.setdefault("match_reason", "")
+
+    return jobs
+
+
 def main():
     today = NOW.strftime("%Y-%m-%d")
     log.info(f"=== Job Search Run: {today} ===")
 
     jobs = run_all()
+    log.info("── Match reasons (Claude Haiku) ─────────────────────────")
+    jobs = generate_match_reasons(jobs)
 
     result_file = RESULTS_DIR / f"{today}.json"
     result_file.write_text(json.dumps(jobs, indent=2, ensure_ascii=False), encoding="utf-8")

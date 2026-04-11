@@ -31,6 +31,8 @@ jobs:
 
       - name: Run job search
         run: python job_search.py
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
       - name: Commit results + dashboard
         run: |
