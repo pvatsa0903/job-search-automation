@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Job Search Automation – Phalguni Vatsa
-Senior PM | Growth · Monetization · AI · Consumer · Health | 10 yrs B2B/B2C SaaS
+Senior PM | Growth · Monetization · AI · Consumer · User Lifecycle | 10 yrs B2B/B2C SaaS
 
 Sources
   API-based  : Greenhouse, Ashby, Lever, Workday, Amazon (search.json), PayPal
@@ -55,16 +55,17 @@ HEADERS = {
 
 # ── Profile fit scoring ───────────────────────────────────────────────────────
 # Based on Phalguni's resume: 10 yrs B2B/B2C SaaS, CVS Health, Autodesk
-# Core strengths: growth, monetization, AI, engagement/retention, health, 0→1
+# Core strengths: user lifecycle, growth, monetization, AI, engagement/retention, 0→1
 
 _HIGH_DOMAINS = [
     "growth", "monetization", "engagement", "retention", "consumer",
-    "personalization", "recommendation", "health", "wellness", "healthcare",
+    "personalization", "recommendation", "user journey", "user lifecycle",
     "gamif", "onboarding", "activation", "subscription", "payments",
     "checkout", "experimentation", "a/b test", "loyalty", "rewards",
     "zero to one", "0 to 1", "0→1", "data product",
     "ai product", "machine learning", "b2c", "habit", "stickiness",
-    "notification", "lifecycle", "incentive", "member",
+    "notification", "lifecycle", "incentive", "member", "conversion",
+    "funnel", "churn", "dau", "mau", "behavioral",
 ]
 _SENIOR_WORDS = [
     "senior", "staff", "principal", "group product", "lead product",
@@ -1117,12 +1118,13 @@ render("undated");
 
 _PROFILE_SUMMARY = (
     "Phalguni Vatsa — Senior PM, 10 yrs B2B/B2C SaaS. "
-    "CVS Health: scaled $17M+ monetization platform, led 0→1 AI personalization dashboard (wearables + recommendations), "
-    "designed gamified retention (Badges, Streaks, Team Challenges), multichannel notification strategy, "
-    "membership tiering, onboarding funnel optimization (30M-user health platform). "
-    "Autodesk: subscription renewal automation ($5B+ ARR), VoC dashboard, personalized checkout upsell/cross-sell. "
-    "Core skills: growth, monetization, engagement/retention, AI-driven products, experimentation/A/B testing, "
-    "0→1 launches, B2C consumer, health-tech, CRM, data science."
+    "Owns the full user lifecycle: onboarding, activation, engagement, retention, and monetization. "
+    "CVS Health (30M-user consumer app): scaled $17M+ monetization platform (gift card checkout + incentives), "
+    "led 0→1 AI personalization + recommendation engine, gamified retention loops (Badges, Streaks, Team Challenges), "
+    "multichannel notification strategy, membership tiering, onboarding funnel re-architecture (+20% activation). "
+    "Autodesk ($5B+ ARR subscription): renewal automation, VoC dashboard (NPS +20pts), personalized checkout upsell/cross-sell. "
+    "Core skills: user journey optimization, growth, monetization, engagement/retention loops, AI-driven personalization, "
+    "experimentation/A/B testing, 0→1 launches, B2C consumer SaaS, behavioral analytics, DAU/MAU growth."
 )
 
 
