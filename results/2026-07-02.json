@@ -1,10 +1,10 @@
 [
   {
-    "title": "Staff Product Manager, Enterprise",
+    "title": "Product Manager, Risk Product Experience",
     "company": "Stripe",
-    "location": "San Francisco, Seattle, New York, Chicago, Atlanta, Remote",
-    "posted": "2026-07-01",
-    "url": "https://stripe.com/jobs/search?gh_jid=7812856",
+    "location": "Seattle, New-York, San Francisco, Atlanta",
+    "posted": "2026-07-02",
+    "url": "https://stripe.com/jobs/search?gh_jid=8040052",
     "fit": "Medium",
     "match_reason": ""
   },
@@ -12,8 +12,134 @@
     "title": "Staff Technical Product Manager, Ads ML Platform ",
     "company": "Reddit",
     "location": "Remote - United States",
-    "posted": "2026-07-01",
+    "posted": "2026-07-02",
     "url": "https://job-boards.greenhouse.io/reddit/jobs/7954001",
+    "fit": "Medium",
+    "match_reason": ""
+  },
+  {
+    "title": "Principal Product Designer, AI Native, Core",
+    "company": "Pinterest",
+    "location": "San Francisco, CA, US; Remote, US",
+    "posted": "2026-07-02",
+    "url": "https://www.pinterestcareers.com/jobs/?gh_jid=7638599",
+    "fit": "Medium",
+    "match_reason": ""
+  },
+  {
+    "title": "Sr. Product Manager, Databricks Free Edition",
+    "company": "Databricks",
+    "location": "San Francisco, California",
+    "posted": "2026-07-02",
+    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7680573002",
+    "fit": "Medium",
+    "match_reason": ""
+  },
+  {
+    "title": "Sr. Product Manager, Databricks Free Edition",
+    "company": "Databricks",
+    "location": "Seattle, Washington",
+    "posted": "2026-07-02",
+    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8235785002",
+    "fit": "Medium",
+    "match_reason": ""
+  },
+  {
+    "title": "Sr. Product Manager, DBSQL",
+    "company": "Databricks",
+    "location": "San Francisco, California",
+    "posted": "2026-07-02",
+    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7924423002",
+    "fit": "Medium",
+    "match_reason": ""
+  },
+  {
+    "title": "Sr. Product Manager, DBSQL",
+    "company": "Databricks",
+    "location": "Seattle, Washington",
+    "posted": "2026-07-02",
+    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7929994002",
+    "fit": "Medium",
+    "match_reason": ""
+  },
+  {
+    "title": "Sr Product Manager - Tech, EC2 Core Product Management, AWS Pricing",
+    "company": "Amazon",
+    "location": "US, WA, Seattle",
+    "posted": "2026-07-02",
+    "url": "https://www.amazon.jobs/en/jobs/10465285/sr-product-manager-tech-ec2-core-product-management-aws-pricing",
+    "fit": "Medium",
+    "match_reason": ""
+  },
+  {
+    "title": "Sr. Product Manager Technical - Associate Workspace",
+    "company": "Amazon",
+    "location": "IN, TS, Hyderabad",
+    "posted": "2026-07-02",
+    "url": "https://www.amazon.jobs/en/jobs/10465005/sr-product-manager-technical-associate-workspace",
+    "fit": "Medium",
+    "match_reason": ""
+  },
+  {
+    "title": "Sr. Product Manager Technical - Learning & Coaching, Associate Experience",
+    "company": "Amazon",
+    "location": "IN, TS, Hyderabad",
+    "posted": "2026-07-02",
+    "url": "https://www.amazon.jobs/en/jobs/10465001/sr-product-manager-technical-learning-coaching-associate-experience",
+    "fit": "Medium",
+    "match_reason": ""
+  },
+  {
+    "title": "Principal Product Manager Technical, Associate Experience",
+    "company": "Amazon",
+    "location": "IN, TS, Hyderabad",
+    "posted": "2026-07-02",
+    "url": "https://www.amazon.jobs/en/jobs/10464978/principal-product-manager-technical-associate-experience",
+    "fit": "Medium",
+    "match_reason": ""
+  },
+  {
+    "title": "Principal Product Mgr – Technical External Services, Amazon S3 Express ",
+    "company": "Amazon",
+    "location": "US, WA, Seattle",
+    "posted": "2026-07-02",
+    "url": "https://www.amazon.jobs/en/jobs/10464702/principal-product-mgr-technical-external-services-amazon-s3-express",
+    "fit": "Medium",
+    "match_reason": ""
+  },
+  {
+    "title": "Principal Product Manager Tech, Sponsored Products and Brands",
+    "company": "Amazon",
+    "location": "US, WA, Seattle",
+    "posted": "2026-07-02",
+    "url": "https://www.amazon.jobs/en/jobs/10465241/principal-product-manager-tech-sponsored-products-and-brands",
+    "fit": "Medium",
+    "match_reason": ""
+  },
+  {
+    "title": "Senior Product Manager, Customer Experience Products - Amazon Customer Service",
+    "company": "Amazon",
+    "location": "US, CA, Santa Clara",
+    "posted": "2026-07-02",
+    "url": "https://www.amazon.jobs/en/jobs/10464996/senior-product-manager-customer-experience-products-amazon-customer-service",
+    "fit": "Medium",
+    "match_reason": ""
+  },
+  {
+    "title": "Product Manager, Tablets",
+    "company": "Amazon",
+    "location": "US, WA, Seattle",
+    "posted": "2026-07-02",
+    "url": "https://www.amazon.jobs/en/jobs/10464861/product-manager-tablets",
+    "fit": "Medium",
+    "match_reason": ""
+  },
+  {
+    "title": "Staff Product Manager, Enterprise",
+    "company": "Stripe",
+    "location": "San Francisco, Seattle, New York, Chicago, Atlanta, Remote",
+    "posted": "2026-07-01",
+    "url": "https://stripe.com/jobs/search?gh_jid=7812856",
     "fit": "Medium",
     "match_reason": ""
   },
@@ -90,11 +216,11 @@
     "match_reason": ""
   },
   {
-    "title": "Product Manager",
-    "company": "PayPal",
-    "location": "San Jose, California, United States of America",
+    "title": "Sr. Product Manager, Compute Platform",
+    "company": "Databricks",
+    "location": "San Francisco, California",
     "posted": "2026-07-01",
-    "url": "https://paypal.wd1.myworkdayjobs.com/job/San-Jose-California-United-States-of-America/Product-Manager_R0136649-1",
+    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8200462002",
     "fit": "Medium",
     "match_reason": ""
   },
@@ -108,11 +234,11 @@
     "match_reason": ""
   },
   {
-    "title": "Sr. Product Manager, Compute Platform",
+    "title": "Sr. Product Manager, Databricks AI",
     "company": "Databricks",
-    "location": "San Francisco, California",
+    "location": "Seattle, Washington",
     "posted": "2026-07-01",
-    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8200462002",
+    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8136204002",
     "fit": "Medium",
     "match_reason": ""
   },
@@ -126,29 +252,11 @@
     "match_reason": ""
   },
   {
-    "title": "Sr. Product Manager, Databricks AI",
+    "title": "Sr. Product Manager, Databricks Repos",
     "company": "Databricks",
     "location": "Seattle, Washington",
     "posted": "2026-07-01",
-    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8136204002",
-    "fit": "Medium",
-    "match_reason": ""
-  },
-  {
-    "title": "Sr. Product Manager, Databricks Free Edition",
-    "company": "Databricks",
-    "location": "Seattle, Washington",
-    "posted": "2026-07-01",
-    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8235785002",
-    "fit": "Medium",
-    "match_reason": ""
-  },
-  {
-    "title": "Sr. Product Manager, Databricks Free Edition",
-    "company": "Databricks",
-    "location": "San Francisco, California",
-    "posted": "2026-07-01",
-    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7680573002",
+    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8326570002",
     "fit": "Medium",
     "match_reason": ""
   },
@@ -158,15 +266,6 @@
     "location": "San Francisco, California",
     "posted": "2026-07-01",
     "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8326513002",
-    "fit": "Medium",
-    "match_reason": ""
-  },
-  {
-    "title": "Sr. Product Manager, Databricks Repos",
-    "company": "Databricks",
-    "location": "Seattle, Washington",
-    "posted": "2026-07-01",
-    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8326570002",
     "fit": "Medium",
     "match_reason": ""
   },
@@ -194,24 +293,6 @@
     "location": "San Francisco, California",
     "posted": "2026-07-01",
     "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7863365002",
-    "fit": "Medium",
-    "match_reason": ""
-  },
-  {
-    "title": "Sr. Product Manager, DBSQL",
-    "company": "Databricks",
-    "location": "San Francisco, California",
-    "posted": "2026-07-01",
-    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7924423002",
-    "fit": "Medium",
-    "match_reason": ""
-  },
-  {
-    "title": "Sr. Product Manager, DBSQL",
-    "company": "Databricks",
-    "location": "Seattle, Washington",
-    "posted": "2026-07-01",
-    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7929994002",
     "fit": "Medium",
     "match_reason": ""
   },
@@ -290,18 +371,18 @@
   {
     "title": "Staff Product Manager, Security",
     "company": "Databricks",
-    "location": "San Francisco, California",
+    "location": "Seattle, Washington",
     "posted": "2026-07-01",
-    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7110499002",
+    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7110509002",
     "fit": "Medium",
     "match_reason": ""
   },
   {
     "title": "Staff Product Manager, Security",
     "company": "Databricks",
-    "location": "Seattle, Washington",
+    "location": "San Francisco, California",
     "posted": "2026-07-01",
-    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7110509002",
+    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7110499002",
     "fit": "Medium",
     "match_reason": ""
   },
@@ -356,6 +437,15 @@
     "location": "JP, 13, Tokyo",
     "posted": "2026-07-01",
     "url": "https://www.amazon.jobs/en/jobs/10463273/sr-product-manager-speed-amazon-fashion",
+    "fit": "Medium",
+    "match_reason": ""
+  },
+  {
+    "title": "Product Manager",
+    "company": "PayPal",
+    "location": "San Jose, California, United States of America",
+    "posted": "2026-06-30",
+    "url": "https://paypal.wd1.myworkdayjobs.com/job/San-Jose-California-United-States-of-America/Product-Manager_R0136649-1",
     "fit": "Medium",
     "match_reason": ""
   },
